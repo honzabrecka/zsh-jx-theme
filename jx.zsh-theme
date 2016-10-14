@@ -24,6 +24,8 @@ ZSH_THEME_GIT_PROMPT_CLEAN="$YS_VCS_PROMPT_CLEAN"
 
 local nodejs_info='$(node -v)'
 
+local ret_status="%(?:%{$fg_bold[green]%}$:%{$fg_bold[red]%}$)"
+
 # Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $
 PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
@@ -33,16 +35,4 @@ PROMPT="
 ${git_info} \
 %{$fg[green]%}${nodejs_info} \
 %{$fg[white]%}[%*]
-%{$terminfo[bold]$fg[red]%}→ %{$reset_color%}"
-
-if [[ "$USER" == "root" ]]; then
-PROMPT="
-%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
-%{$bg[yellow]%}%{$fg[cyan]%}%n%{$reset_color%} \
-%{$fg[white]%}in \
-%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
-${git_info} \
-%{$fg[green]%}${nodejs_info} \
-%{$fg[white]%}[%*]
-%{$terminfo[bold]$fg[red]%}→ %{$reset_color%}"
-fi
+${ret_status} %{$reset_color%}"
